@@ -70,7 +70,7 @@ function notify(numberOfIssues) {
         type: 'basic',
         iconUrl: "../assets/bunny_0.png",
         title: 'You have issues that are waiting for you',
-        message: `There are ${numberOfIssues} issue(s) that are waiting for our review. Please click the notification to review them.`,
+        message: `There are ${numberOfIssues} issue(s) that are waiting for your review! Please click the notification to review them.`,
         priority: 2,
     })
     chrome.notifications.onClicked.addListener(() => chrome.tabs.create({ url: ISSUES_URL }))
