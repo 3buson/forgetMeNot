@@ -1,0 +1,26 @@
+import { getSync, saveLocally } from './storage.js'
+
+export async function loadIssuesFromJira() {
+    console.log('Loading issues from Jira.')
+    const credentials = await getSync("credentials")
+    if (!credentials || !credentials.email || !credentials.apiKey) {
+        console.error('Credentials not present! Cannot fetch from Jira.')
+        chrome.runtime.openOptionsPage()
+        return
+    }
+
+    const url = `https://celtra.atlassian.net/rest/api/3/search?jql=assignee%20%3D%20currentUser()%20and%20status%20in%20("Code%20review"%2C%20"Spec%20review")`
+    const options = {
+        method: "GET",
+        headers: {"Authorization": `Basic ${btoa(`${credentials.email}:${credentials.apiKey}`)}`},
+    }
+
+    return fetch(url, options)
+        .then(response => response.json())
+        .then(data => {
+            const numberOfIssues = data.issues.length
+            saveLocally("numberOfIssues", numberOfIssues )
+            saveLocally("lastChanged", Date.now())
+        })
+        .catch(error => console.error(error))
+}

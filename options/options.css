@@ -1,0 +1,13 @@
+.options__label {
+    width: 300px;
+    display: flex;
+}
+
+.options__label-text {
+    width: 75px;
+    line-height: 22px;
+}
+
+.options__input {
+    width: 200px;
+}
