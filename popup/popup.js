@@ -1,5 +1,9 @@
-import { getLocally, STORAGE_KEYS } from '../shared/storage.js'
-import { getNumberOfStaleIssues, toggleElement, update } from '../shared/utils.js'
+import { getLocally } from '../shared/storage.js'
+import { getNumberOfStaleIssues, ISSUES_URL, toggleElement, update } from '../shared/utils.js'
+
+function setIssuesUrl() {
+    document.getElementById("issues-url").href = ISSUES_URL
+}
 
 function updateHtml() {
     updateMessaging()
@@ -35,4 +39,6 @@ async function updateMessaging() {
     }
 }
 
+
+setIssuesUrl()
 update().then(() => updateHtml())

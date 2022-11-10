@@ -5,13 +5,19 @@ const ONE_DAY_IN_MILISECONDS = 24 * 60 * 60 * 1000
 let timeout = null
 let currentIconState = 0
 
+export const ISSUES_URL = 'https://celtra.atlassian.net/issues/?jql=assignee%20%3D%20currentUser()%20and%20status%20in%20("Code%20review"%2C%20"Spec%20review")'
+
 export function toggleElement(elementId, visible) {
     const display = visible ? 'block' : 'none'
     document.getElementById(elementId).style.display = display
 }
 
-export function update() {
-    return loadIssuesFromJira().then(() => animateIcon())
+export async function update() {
+    await loadIssuesFromJira()
+    const numberOfIssues = await getLocally("numberOfIssues")
+    const numberOfStaleIssues = await getNumberOfStaleIssues()
+    animateIcon(numberOfStaleIssues)
+    notify(numberOfIssues)
 }
 
 export async function getNumberOfStaleIssues() {
@@ -35,20 +41,39 @@ export async function getNumberOfStaleIssues() {
     }, 0)
 }
 
-async function animateIcon() {
-    const numberOfStaleIssues = await getNumberOfStaleIssues()
-    if (numberOfStaleIssues > 0) {
-        currentIconState++
-        const iconNumber = currentIconState % 4
-        chrome.action.setIcon({ path: `../assets/bunny_${iconNumber}.png` })
-        if (timeout) {
-            clearTimeout(timeout)
-            timeout = null
-        }
-        timeout = setTimeout(animateIcon, 50)
-    } else {
+function animateIcon(numberOfStaleIssues) {
+    if (numberOfStaleIssues === 0) {
         chrome.action.setIcon({ path: "../assets/bunny_0.png" })
+        return
     }
+
+    currentIconState++
+    const iconNumber = currentIconState % 4
+    chrome.action.setIcon({ path: `../assets/bunny_${iconNumber}.png` })
+    if (timeout) {
+        clearTimeout(timeout)
+        timeout = null
+    }
+    timeout = setTimeout(() => {
+        animateIcon(numberOfStaleIssues)
+    }, 50)
+}
+
+function notify(numberOfIssues) {
+    console.log('notify')
+    console.log(numberOfIssues)
+    if (numberOfIssues === 0) {
+        return
+    }
+
+    chrome.notifications.create("issues-notification", {
+        type: 'basic',
+        iconUrl: "../assets/bunny_0.png",
+        title: 'You have issues that are waiting for you',
+        message: `There are ${numberOfIssues} issue(s) that are waiting for our review. Please click the notification to review them.`,
+        priority: 2,
+    })
+    chrome.notifications.onClicked.addListener(() => chrome.tabs.create({ url: ISSUES_URL }))
 }
 
 function isWeekend() {

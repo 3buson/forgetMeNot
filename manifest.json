@@ -7,6 +7,11 @@
         "default_popup": "popup/popup.html",
         "default_icon": "assets/bunny_0.png"
     },
+    "icons": {
+        "16": "assets/icon16.png",
+        "48": "assets/icon48.png",
+        "128": "assets/icon128.png"
+    },
     "options_page": "options/options.html",
     "background": {
         "service_worker": "background/background.js",
@@ -14,6 +19,7 @@
     },
     "permissions": [
         "alarms",
+        "notifications",
         "storage",
         "tabs"
     ],

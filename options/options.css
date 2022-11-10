@@ -3,6 +3,7 @@
 .options__label {
     width: 300px;
     display: flex;
+    margin: auto;
 }
 
 .options__label-text {

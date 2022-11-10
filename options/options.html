@@ -3,21 +3,25 @@
         <link rel="stylesheet" href="options.css">
     </head>
     <body>
-        <label class="options__label">
-            <div class="options__label-text">Jira email</div>
-            <input class="options__input" type="email" placeholder="Please enter your Jira email" id="email" />
-        </label>
-        <br/>
-        <label class="options__label">
-            <div class="options__label-text">Jira API key</div>
-            <input class="options__input" type="text" placeholder="Please enter your Jira API key" id="api-key" />
-        </label>
-        <br/>
-        <button id="save">Save</button>
-        <br/>
-        <div id="status"></div>
-        <br/>
-        <br/>
+        <div class="wrapper">
+            <div class="heading">Please enter the Jira credentials so the extension is able to pull the data from the Atlassian API.</div>
+            <br/>
+            <label class="options__label">
+                <div class="options__label-text">Jira email</div>
+                <input class="options__input" type="email" placeholder="Please enter your Jira email" id="email" />
+            </label>
+            <br/>
+            <label class="options__label">
+                <div class="options__label-text">Jira API key</div>
+                <input class="options__input" type="text" placeholder="Please enter your Jira API key" id="api-key" />
+            </label>
+            <br/>
+            <div class="button" id="save">Save</div>
+            <br/>
+            <div id="status"></div>
+            <br/>
+            <br/>
+        </div>
         <script type="module" src="options.js"></script>
     </body>
 </html>
