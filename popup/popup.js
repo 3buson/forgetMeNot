@@ -1,14 +1,6 @@
 import { getLocally, STORAGE_KEYS } from '../shared/storage.js'
 import { getNumberOfStaleIssues, toggleElement, update } from '../shared/utils.js'
 
-function addStorageEventListener() {
-    chrome.storage.onChanged.addListener(function (changes, _) {
-        if (changes[STORAGE_KEYS.numberOfIssues]) {
-            updateHtml()
-        }
-      })
-}
-
 function updateHtml() {
     updateMessaging()
     showLoaded()
@@ -43,5 +35,4 @@ async function updateMessaging() {
     }
 }
 
-addStorageEventListener()
 update().then(() => updateHtml())

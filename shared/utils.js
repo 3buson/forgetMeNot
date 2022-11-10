@@ -1,6 +1,7 @@
 import { loadIssuesFromJira } from './jira.js'
 import { getLocally } from "./storage.js"
 
+const ONE_DAY_IN_MILISECONDS = 24 * 60 * 60 * 1000
 let timeout = null
 let currentIconState = 0
 
@@ -14,8 +15,8 @@ export function update() {
 }
 
 export async function getNumberOfStaleIssues() {
+    // never nag on weekends
     if (isWeekend()) {
-        // never nag on weekends
         return 0
     }
 
@@ -25,9 +26,8 @@ export async function getNumberOfStaleIssues() {
     }
 
     return issueUpdatedTimestamps.reduce((numberOfStaleIssues, issueUpdatedTimestamp) => {
-        const oneDayInMiliseconds = 24 * 60 * 60 * 1000
         const diffInMiliseconds = Math.abs(new Date(issueUpdatedTimestamp) - new Date())
-        if (diffInMiliseconds > oneDayInMiliseconds) {
+        if (diffInMiliseconds > ONE_DAY_IN_MILISECONDS) {
             return numberOfStaleIssues + 1
         } else {
             return numberOfStaleIssues
@@ -38,7 +38,6 @@ export async function getNumberOfStaleIssues() {
 async function animateIcon() {
     const numberOfStaleIssues = await getNumberOfStaleIssues()
     if (numberOfStaleIssues > 0) {
-        console.log("Stale issues present, rotating the icon.")
         currentIconState++
         const iconNumber = currentIconState % 4
         chrome.action.setIcon({ path: `../assets/bunny_${iconNumber}.png` })
@@ -48,7 +47,6 @@ async function animateIcon() {
         }
         timeout = setTimeout(animateIcon, 50)
     } else {
-        console.log("No stale issues present, setting the default icon.")
         chrome.action.setIcon({ path: "../assets/bunny_0.png" })
     }
 }

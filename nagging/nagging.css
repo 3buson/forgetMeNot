@@ -1,1 +1,16 @@
 @import "../shared/common.css";
+
+body {
+    padding: 32px;
+    display: flex;
+    justify-content: center;
+    font-size: 16px;
+}
+
+.heading {
+    font-size: 22px;
+}
+
+.wrapper {
+    text-align: center;
+}

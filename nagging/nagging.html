@@ -1,23 +1,20 @@
 <html>
     <head>
+        <meta charset="UTF-8">
         <link rel="stylesheet" href="nagging.css">
     </head>
     <body>
-        <label class="nagging__heading">
-            <div class="options__label-text">Jira email</div>
-            <input class="options__input" type="email" placeholder="Please enter your Jira email" id="email" />
-        </label>
-        <br/>
-        <label class="options__label">
-            <div class="options__label-text">Jira API key</div>
-            <input class="options__input" type="text" placeholder="Please enter your Jira API key" id="api-key" />
-        </label>
-        <br/>
-        <button id="save">Save</button>
-        <br/>
-        <div id="status"></div>
-        <br/>
-        <br/>
-        <script type="module" src="options.js"></script>
+        <div class="wrapper">
+            <div id="no-stale-issues" class="heading">You have <span id="number-of-issues-1">0</span> ticket(s) assigned for review.</div>
+            <div id="stale-issues" class="heading">You have <span id="number-of-issues-2">0</span> ticket(s) assigned for review, <span id="number-of-stale-issues">0</span> of them are waiting for you for longer than a day 😱!</div>
+            <br/>
+            <div>
+                Please review them as soon as possible.<br/>
+                <a href='https://celtra.atlassian.net/issues/?jql=assignee%20%3D%20currentUser()%20and%20status%20in%20("Code%20review"%2C%20"Spec%20review")' target="_blank">
+                    Click here!
+                </a>
+            </div>
+        </div>
+        <script type="module" src="nagging.js"></script>
     </body>
 </html>
