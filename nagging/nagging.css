@@ -11,6 +11,10 @@ body {
     font-size: 22px;
 }
 
-.wrapper {
+.nagging__wrapper {
     text-align: center;
+}
+
+.nagging__image {
+    width: 300px;
 }

@@ -8,6 +8,7 @@ chrome.runtime.onInstalled.addListener(() => {
     update()
     schedulePullDataAlarm()
     scheduleNagAlarm()
+    openNagPage()
 
     chrome.alarms.onAlarm.addListener(alarm => {
         if (alarm.name === PULL_DATA_ALARM_NAME) {
