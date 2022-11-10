@@ -1,0 +1,23 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="nagging.css">
+    </head>
+    <body>
+        <label class="nagging__heading">
+            <div class="options__label-text">Jira email</div>
+            <input class="options__input" type="email" placeholder="Please enter your Jira email" id="email" />
+        </label>
+        <br/>
+        <label class="options__label">
+            <div class="options__label-text">Jira API key</div>
+            <input class="options__input" type="text" placeholder="Please enter your Jira API key" id="api-key" />
+        </label>
+        <br/>
+        <button id="save">Save</button>
+        <br/>
+        <div id="status"></div>
+        <br/>
+        <br/>
+        <script type="module" src="options.js"></script>
+    </body>
+</html>

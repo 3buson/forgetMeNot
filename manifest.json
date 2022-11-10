@@ -5,9 +5,10 @@
     "version": "1.0",
     "action": {
         "default_popup": "popup/popup.html",
-        "default_icon": "assets/chicken_kiev.png"
+        "default_icon": "assets/bunny_0.png"
     },
     "options_page": "options/options.html",
+    "nagging_page": "nagging/nagging.html",
     "background": {
         "service_worker": "background/background.js",
         "type": "module"
