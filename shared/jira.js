@@ -19,20 +19,8 @@ export async function loadIssuesFromJira() {
         .then(response => response.json())
         .then(data => {
             saveLocally("numberOfIssues", data.issues.length)
-            saveLocally("numberOfStaleIssues", numberOfStaleIssues(data.issues))
+            saveLocally("issueUpdatedTimestamps", data.issues.map(issue => issue.fields.updated))
             saveLocally("lastChanged", Date.now())
         })
         .catch(error => console.error(error))
-}
-
-function numberOfStaleIssues(issues) {
-    return issues.reduce((numberOfStaleIssues, issue) => {
-        const oneDayInMiliseconds = 24 * 60 * 60 * 1000
-        const diffInMiliseconds = Math.abs(new Date(issue.fields.updated) - new Date())
-        if (diffInMiliseconds > oneDayInMiliseconds) {
-            return numberOfStaleIssues + 1
-        } else {
-            return numberOfStaleIssues
-        }
-    }, 0)
 }

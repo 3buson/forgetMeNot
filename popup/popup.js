@@ -1,6 +1,5 @@
-import { loadIssuesFromJira } from '../shared/jira.js'
 import { getLocally, STORAGE_KEYS } from '../shared/storage.js'
-import { toggleElement } from '../shared/utils.js'
+import { getNumberOfStaleIssues, toggleElement, update } from '../shared/utils.js'
 
 function addStorageEventListener() {
     chrome.storage.onChanged.addListener(function (changes, _) {
@@ -11,7 +10,6 @@ function addStorageEventListener() {
 }
 
 function updateHtml() {
-    updateNumberOfIssuesDisplay()
     updateMessaging()
     showLoaded()
 }
@@ -21,22 +19,29 @@ function showLoaded() {
     toggleElement("loaded", true)
 }
 
-function updateNumberOfIssuesDisplay() {
+async function updateMessaging() {
+    const numberOfIssues = await getLocally("numberOfIssues")
     const numberOfIssuesElement = document.getElementById("number-of-issues")
-    getLocally("numberOfIssues").then(numberOfIssues => numberOfIssuesElement.textContent = numberOfIssues)
-}
+    numberOfIssuesElement.textContent = numberOfIssues
 
-function updateMessaging() {
-    getLocally("numberOfIssues").then(numberOfIssues => {
-        if (numberOfIssues > 0) {
-            toggleElement("no-issues", false)
-            toggleElement("issues", true)
-        } else {
-            toggleElement("no-issues", true)
-            toggleElement("issues", false)
-        }
-    })
+    if (numberOfIssues > 0) {
+        toggleElement("no-issues", false)
+        toggleElement("issues", true)
+    } else {
+        toggleElement("no-issues", true)
+        toggleElement("issues", false)
+    }
+
+    const numberOfStaleIssues = await getNumberOfStaleIssues()
+    const numberOfStaleIssuesElement = document.getElementById("number-of-stale-issues")
+    numberOfStaleIssuesElement.textContent = numberOfStaleIssues
+
+    if (numberOfStaleIssues > 0) {
+        toggleElement("stale-issues", true)
+    } else {
+        toggleElement("stale-issues", false)
+    }
 }
 
 addStorageEventListener()
-loadIssuesFromJira().then(() => updateHtml())
+update().then(() => updateHtml())

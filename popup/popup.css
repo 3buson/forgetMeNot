@@ -1,7 +1,7 @@
 @import "../shared/common.css";
 
 html {
-    height: 200px;
+    height: 230px;
 }
 
 body {
@@ -37,6 +37,10 @@ body {
 .spinner__text {
     font-size: 14px;
     margin-top: 16px;
+}
+
+#issues {
+    margin-top: 32px;
 }
 
 @keyframes LOADING_CIRCLE {
