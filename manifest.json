@@ -1,11 +1,11 @@
 {
     "manifest_version": 3,
-    "name": "Jirator",
+    "name": "ForgetMeNot",
     "description": "Nagging you about code and spec reviews since 2022.",
     "version": "1.0",
     "action": {
         "default_popup": "popup/popup.html",
-        "default_icon": "assets/bunny_0.png"
+        "default_icon": "assets/icon128.png"
     },
     "icons": {
         "16": "assets/icon16.png",
