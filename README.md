@@ -1,0 +1,1 @@
+ForgetMeNot is a simple chrome extension that reminds you of Code/Spec review tickets that are assigned to you on Jira.
