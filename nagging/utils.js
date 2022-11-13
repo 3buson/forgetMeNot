@@ -1,8 +1,7 @@
-import { getLocally } from "../shared/storage.js";
-import { getNumberOfStaleIssues, toggleElement } from "../shared/utils.js";
+import { getNumberOfIssues, getNumberOfStaleIssues, toggleElement } from "../shared/utils.js";
 
 export async function updateHtml() {
-    const numberOfIssues = await getLocally("numberOfIssues")
+    const numberOfIssues = await getNumberOfIssues()
     const numberOfStaleIssues = await getNumberOfStaleIssues()
 
     document.getElementById('number-of-issues-1').innerText = numberOfIssues

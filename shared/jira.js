@@ -18,7 +18,6 @@ export async function loadIssuesFromJira() {
     return fetch(url, options)
         .then(response => response.json())
         .then(data => {
-            saveLocally("numberOfIssues", data.issues.length)
             saveLocally("issueUpdatedTimestamps", data.issues.map(issue => issue.fields.updated))
             saveLocally("lastChanged", Date.now())
         })

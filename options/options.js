@@ -5,6 +5,7 @@ function saveCredentials() {
     const apiKey = document.getElementById('api-key').value
     saveSync('credentials', { email, apiKey }).then(() => {
         document.getElementById('status').textContent = 'Credentials saved!'
+        setTimeout(() => chrome.tabs.getCurrent(tab => chrome.tabs.remove(tab.id)), 500)
     })
 }
 

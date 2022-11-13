@@ -14,10 +14,19 @@ export function toggleElement(elementId, visible) {
 
 export async function update() {
     await loadIssuesFromJira()
-    const numberOfIssues = await getLocally("numberOfIssues")
+    const numberOfIssues = await getNumberOfIssues()
     const numberOfStaleIssues = await getNumberOfStaleIssues()
     animateIcon(numberOfStaleIssues)
     notify(numberOfIssues)
+}
+
+export async function getNumberOfIssues() {
+    const issueUpdatedTimestamps = await getLocally("issueUpdatedTimestamps")
+    if (!Array.isArray(issueUpdatedTimestamps)) {
+        return 0
+    }
+
+    return issueUpdatedTimestamps.length
 }
 
 export async function getNumberOfStaleIssues() {
@@ -43,7 +52,7 @@ export async function getNumberOfStaleIssues() {
 
 function animateIcon(numberOfStaleIssues) {
     if (numberOfStaleIssues === 0) {
-        chrome.action.setIcon({ path: "../assets/bunny_0.png" })
+        chrome.action.setIcon({ path: "../assets/icon128.png" })
         return
     }
 
@@ -60,9 +69,7 @@ function animateIcon(numberOfStaleIssues) {
 }
 
 function notify(numberOfIssues) {
-    console.log('notify')
-    console.log(numberOfIssues)
-    if (numberOfIssues === 0) {
+    if (numberOfIssues === 0 || !numberOfIssues) {
         return
     }
 

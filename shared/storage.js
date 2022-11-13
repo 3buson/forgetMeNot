@@ -1,5 +1,4 @@
 export const STORAGE_KEYS = {
-    numberOfIssues: 'numberOfIssues',
     issueUpdatedTimestamps: 'issueUpdatedTimestamps',
     lastChanged: 'lastChanged',
     credentials: 'credentials'

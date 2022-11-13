@@ -1,5 +1,4 @@
-import { getLocally } from '../shared/storage.js'
-import { getNumberOfStaleIssues, ISSUES_URL, toggleElement, update } from '../shared/utils.js'
+import { getNumberOfIssues, getNumberOfStaleIssues, ISSUES_URL, toggleElement, update } from '../shared/utils.js'
 
 function setIssuesUrl() {
     document.getElementById("issues-url").href = ISSUES_URL
@@ -16,7 +15,7 @@ function showLoaded() {
 }
 
 async function updateMessaging() {
-    const numberOfIssues = await getLocally("numberOfIssues")
+    const numberOfIssues = await getNumberOfIssues()
     const numberOfIssuesElement = document.getElementById("number-of-issues")
     numberOfIssuesElement.textContent = numberOfIssues
 

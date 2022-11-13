@@ -38,7 +38,8 @@ function getTomorrowAtNine() {
 
 async function handleNag() {
     scheduleNagAlarm()
-    if (getNumberOfStaleIssues === 0) {
+    const numberOfStaleIssues = await getNumberOfStaleIssues()
+    if (numberOfStaleIssues === 0 || !numberOfStaleIssues) {
         return
     }
     await openNagPage()
