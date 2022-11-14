@@ -5,14 +5,20 @@ ForgetMeNot is a simple Google Chrome extension that reminds you of Code/Spec re
 
 Currently, the Jira API URL is hardcoded to `https://celtra.atlassian.net/`, this could easily be made configurable in the future.
 
+<br/>
 
 ## Usage
-The extension is not (yet) published on Chrome Web Store, you can simply clone the repo from GitHub (or download the ZIP & unpack it locally) and manually install the extension by navigating to `chrome://extensions/` & clicking the `Load unpacked` button. Make sure that `Developer mode` is turned on.
+The extension is not (yet) published on Chrome Web Store. You can clone the repo from GitHub (or download the ZIP & unpack it locally) and manually install the extension by navigating to `chrome://extensions/` & clicking the `Load unpacked` button.
+
+Make sure that `Developer mode` is turned on.
+
+<br/>
 
 <img width="1601" alt="Screenshot 2022-11-14 at 11 00 01" src="https://user-images.githubusercontent.com/6026190/201631259-f0dd0fdb-61a8-4604-830f-a631c3be4359.png">
 
 <img width="1651" alt="Screenshot 2022-11-14 at 10 59 07" src="https://user-images.githubusercontent.com/6026190/201631099-78f8e554-a081-4375-8015-d6b8d75ef396.png">
 
+<br/>
 
 ## Features
 - When you install the extension you'll be prompted to enter the Jira email and API key so the extension can fetch the issues from the Jira API.
