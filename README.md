@@ -8,7 +8,7 @@ Currently, the Jira API URL is hardcoded to `https://celtra.atlassian.net/`, thi
 <br/>
 
 ## Usage
-The extension is not (yet) published on Chrome Web Store. You can clone the repo from GitHub (or download the ZIP & unpack it locally) and manually install the extension by navigating to `chrome://extensions/` & clicking the `Load unpacked` button.
+The extension is not (yet) published on Chrome Web Store. You can clone the repo from GitHub (or download the ZIP & unpack it locally) and manually install the extension by navigating to `chrome://extensions` & clicking the `Load unpacked` button.
 
 Make sure that `Developer mode` is turned on.
 
