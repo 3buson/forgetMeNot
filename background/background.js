@@ -4,7 +4,9 @@ import { openNagPage } from '../nagging/utils.js'
 const PULL_DATA_ALARM_NAME = "pullExternalData"
 const NAG_ALARM_NAME = "nag"
 
-chrome.runtime.onInstalled.addListener(() => {
+initialize()
+
+function initialize() {
     update()
     schedulePullDataAlarm()
     scheduleNagAlarm()
@@ -16,13 +18,10 @@ chrome.runtime.onInstalled.addListener(() => {
             handleNag()
         }
     })
-})
+}
 
 function schedulePullDataAlarm() {
-    chrome.alarms.create(PULL_DATA_ALARM_NAME, {
-        delayInMinutes: 5,
-        periodInMinutes: 5,
-    })
+    chrome.alarms.create(PULL_DATA_ALARM_NAME, { periodInMinutes: 5 })
 }
 
 function scheduleNagAlarm() {
