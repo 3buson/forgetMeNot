@@ -7,10 +7,6 @@ const NAG_ALARM_NAME = "nag"
 initialize()
 
 function initialize() {
-    update()
-    schedulePullDataAlarm()
-    scheduleNagAlarm()
-
     chrome.alarms.onAlarm.addListener(alarm => {
         if (alarm.name === PULL_DATA_ALARM_NAME) {
             update()
@@ -18,6 +14,10 @@ function initialize() {
             handleNag()
         }
     })
+
+    update()
+    schedulePullDataAlarm()
+    scheduleNagAlarm()
 }
 
 function schedulePullDataAlarm() {
