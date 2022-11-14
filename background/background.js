@@ -26,7 +26,7 @@ function schedulePullDataAlarm() {
 }
 
 function scheduleNagAlarm() {
-    chrome.alarms.create(PULL_DATA_ALARM_NAME, { when: getTomorrowAtNine().valueOf() })
+    chrome.alarms.create(NAG_ALARM_NAME, { when: getTomorrowAtNine().valueOf() })
 }
 
 function getTomorrowAtNine() {
