@@ -25,4 +25,4 @@ Make sure that `Developer mode` is turned on.
 - It will do so every 5 minutes and when the extension popup is open.
 - The popup displays if and how many issues are assigned to you and provides a link to open them in Jira.
 - If the issue has not been updated for more than 24 hours it will be considered as 'stale'.
-- You will get notified about stale issues every working day at 9 am through a new tab and a system notification.
+- You will get notified about stale issues every working day at 9 am and 2 pm through a new tab and a system notification.

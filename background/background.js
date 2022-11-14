@@ -12,31 +12,35 @@ function initialize() {
             update()
         } else if (alarm.name === NAG_ALARM_NAME) {
             handleNag()
+        } else {
+            console.log(`Unknown alarm encountered: '${alarm.name}'.`)
         }
     })
 
     update()
     schedulePullDataAlarm()
-    scheduleNagAlarm()
+    scheduleNagAlarms()
 }
 
 function schedulePullDataAlarm() {
     chrome.alarms.create(PULL_DATA_ALARM_NAME, { periodInMinutes: 5 })
 }
 
-function scheduleNagAlarm() {
-    chrome.alarms.create(NAG_ALARM_NAME, { when: getTomorrowAtNine().valueOf() })
+function scheduleNagAlarms() {
+    chrome.alarms.clear(NAG_ALARM_NAME)
+    chrome.alarms.create(NAG_ALARM_NAME, { when: getTomorrowAt(9).valueOf() })
+    chrome.alarms.create(NAG_ALARM_NAME, { when: getTomorrowAt(14).valueOf() })
 }
 
-function getTomorrowAtNine() {
+function getTomorrowAt(hour) {
     const date = new Date()
     date.setDate(date.getDate() + 1)
-    date.setHours(9, 0, 0)
+    date.setHours(hour, 0, 0)
     return date
 }
 
 async function handleNag() {
-    scheduleNagAlarm()
+    scheduleNagAlarms()
     const numberOfStaleIssues = await getNumberOfStaleIssues()
     if (numberOfStaleIssues === 0 || !numberOfStaleIssues) {
         return
