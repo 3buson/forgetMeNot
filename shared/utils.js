@@ -16,7 +16,7 @@ export async function update() {
     await loadIssuesFromJira()
     const numberOfIssues = await getNumberOfIssues()
     const numberOfStaleIssues = await getNumberOfStaleIssues()
-    animateIcon(numberOfStaleIssues)
+    animateIcon(numberOfIssues, numberOfStaleIssues)
     notify(numberOfIssues)
 }
 
@@ -50,9 +50,14 @@ export async function getNumberOfStaleIssues() {
     }, 0)
 }
 
-function animateIcon(numberOfStaleIssues) {
-    if (numberOfStaleIssues === 0) {
+function animateIcon(numberOfIssues, numberOfStaleIssues) {
+    if (numberOfIssues === 0) {
         chrome.action.setIcon({ path: "../assets/icon128.png" })
+        return
+    }
+
+    if (numberOfStaleIssues === 0) {
+        chrome.action.setIcon({ path: "../assets/bunny_0.png" })
         return
     }
 
@@ -63,9 +68,7 @@ function animateIcon(numberOfStaleIssues) {
         clearTimeout(timeout)
         timeout = null
     }
-    timeout = setTimeout(() => {
-        animateIcon(numberOfStaleIssues)
-    }, 50)
+    timeout = setTimeout(() => animateIcon(numberOfIssues, numberOfStaleIssues), 50)
 }
 
 function notify(numberOfIssues) {
