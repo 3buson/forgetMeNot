@@ -2,6 +2,7 @@
 ![icon128](https://user-images.githubusercontent.com/6026190/201629288-a5335a3c-3cdb-47cf-8498-1908fd3be453.png)
 
 ForgetMeNot is a simple Google Chrome extension that reminds you of Code/Spec review tickets that are assigned to you on Jira. It was created in an attempt to speed up the Code/Spec review process @Celtra.
+
 Currently, the Jira API URL is hardcoded to `https://celtra.atlassian.net/`, this could easily be made configurable in the future.
 
 
