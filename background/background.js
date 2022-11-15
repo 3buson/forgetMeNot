@@ -25,11 +25,14 @@ function initialize() {
 function schedulePullDataAlarm() {
     chrome.alarms.clear(PULL_DATA_ALARM_NAME)
     chrome.alarms.create(PULL_DATA_ALARM_NAME, { periodInMinutes: 5 })
+    console.log('Pull data alarm scheduled.')
 }
 
 function scheduleNagAlarm() {
     chrome.alarms.clear(NAG_ALARM_NAME)
-    chrome.alarms.create(NAG_ALARM_NAME, { when: getNextNagTime().valueOf() })
+    const nextNagTime = getNextNagTime()
+    chrome.alarms.create(NAG_ALARM_NAME, { when: nextNagTime.valueOf() })
+    console.log(`Nag alarm scheduled for ${getNextNagTime().toString()}.`)
 }
 
 function getNextNagTime() {

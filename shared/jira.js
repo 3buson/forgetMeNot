@@ -4,7 +4,7 @@ export async function loadIssuesFromJira() {
     console.log('Loading issues from Jira.')
     const credentials = await getSync("credentials")
     if (!credentials || !credentials.email || !credentials.apiKey) {
-        console.error('Credentials not present! Cannot fetch from Jira.')
+        console.warn('Credentials not present! Cannot fetch from Jira.')
         chrome.runtime.openOptionsPage()
         return
     }

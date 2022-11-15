@@ -1,11 +1,15 @@
 import { getSync, saveSync } from "../shared/storage.js";
+import { update } from "../shared/utils.js";
 
 function saveCredentials() {
     const email = document.getElementById('email').value
     const apiKey = document.getElementById('api-key').value
     saveSync('credentials', { email, apiKey }).then(() => {
         document.getElementById('status').textContent = 'Credentials saved!'
-        setTimeout(() => chrome.tabs.getCurrent(tab => chrome.tabs.remove(tab.id)), 500)
+        setTimeout(() => {
+            update()
+            chrome.tabs.getCurrent(tab => chrome.tabs.remove(tab.id))
+        }, 500)
     })
 }
 
