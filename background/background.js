@@ -28,14 +28,22 @@ function schedulePullDataAlarm() {
 
 function scheduleNagAlarms() {
     chrome.alarms.clear(NAG_ALARM_NAME)
-    chrome.alarms.create(NAG_ALARM_NAME, { when: getTomorrowAt(9).valueOf() })
-    chrome.alarms.create(NAG_ALARM_NAME, { when: getTomorrowAt(14).valueOf() })
+    chrome.alarms.create(NAG_ALARM_NAME, { when: getNextNagTime().valueOf() })
 }
 
-function getTomorrowAt(hour) {
+function getNextNagTime() {
     const date = new Date()
-    date.setDate(date.getDate() + 1)
-    date.setHours(hour, 0, 0)
+    const currentHour = date.getHours()
+
+    if (currentHour < 9) { // morning
+        date.setHours(9, 0, 0)
+    } else if (currentHour < 14) { // midday
+        date.setHours(14, 0, 0)
+    } else { // later afternoon
+        date.setDate(date.getDate() + 1)
+        date.setHours(9, 0, 0)
+    }
+
     return date
 }
 
