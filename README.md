@@ -20,6 +20,13 @@ Make sure that `Developer mode` is turned on.
 
 <br/>
 
+For the best experience, please pin the extension to your taskbar.
+
+<img width="1654" alt="Screenshot 2022-11-15 at 17 28 00" src="https://user-images.githubusercontent.com/6026190/201973314-65af593a-4d36-4b8b-9ecb-d8fd9ff325ff.png">
+
+
+<br/>
+
 ## Features
 - When you install the extension you'll be prompted to enter the Jira email and API key so the extension can fetch the issues from the Jira API.
 - It will do so every 5 minutes and when the extension popup is open.
