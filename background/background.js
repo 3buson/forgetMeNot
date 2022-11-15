@@ -19,14 +19,15 @@ function initialize() {
 
     update()
     schedulePullDataAlarm()
-    scheduleNagAlarms()
+    scheduleNagAlarm()
 }
 
 function schedulePullDataAlarm() {
+    chrome.alarms.clear(PULL_DATA_ALARM_NAME)
     chrome.alarms.create(PULL_DATA_ALARM_NAME, { periodInMinutes: 5 })
 }
 
-function scheduleNagAlarms() {
+function scheduleNagAlarm() {
     chrome.alarms.clear(NAG_ALARM_NAME)
     chrome.alarms.create(NAG_ALARM_NAME, { when: getNextNagTime().valueOf() })
 }
@@ -48,7 +49,7 @@ function getNextNagTime() {
 }
 
 async function handleNag() {
-    scheduleNagAlarms()
+    scheduleNagAlarm()
     const numberOfStaleIssues = await getNumberOfStaleIssues()
     if (numberOfStaleIssues === 0 || !numberOfStaleIssues) {
         return
