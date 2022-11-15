@@ -17,7 +17,6 @@ export async function update() {
     const numberOfIssues = await getNumberOfIssues()
     const numberOfStaleIssues = await getNumberOfStaleIssues()
     animateIcon(numberOfIssues, numberOfStaleIssues)
-    notify(numberOfIssues)
 }
 
 export async function getNumberOfIssues() {
@@ -30,11 +29,6 @@ export async function getNumberOfIssues() {
 }
 
 export async function getNumberOfStaleIssues() {
-    // never nag on weekends
-    if (isWeekend()) {
-        return 0
-    }
-
     const issueUpdatedTimestamps = await getLocally("issueUpdatedTimestamps")
     if (!Array.isArray(issueUpdatedTimestamps)) {
         return 0
@@ -69,24 +63,4 @@ function animateIcon(numberOfIssues, numberOfStaleIssues) {
         timeout = null
     }
     timeout = setTimeout(() => animateIcon(numberOfIssues, numberOfStaleIssues), 50)
-}
-
-function notify(numberOfIssues) {
-    if (numberOfIssues === 0 || !numberOfIssues) {
-        return
-    }
-
-    chrome.notifications.create("issues-notification", {
-        type: 'basic',
-        iconUrl: "../assets/bunny_0.png",
-        title: 'You have issues that are waiting for you',
-        message: `There are ${numberOfIssues} issue(s) that are waiting for your review! Please click the notification to review them.`,
-        priority: 2,
-    })
-    chrome.notifications.onClicked.addListener(() => chrome.tabs.create({ url: ISSUES_URL }))
-}
-
-function isWeekend() {
-    const date = new Date()
-    return date.getDay() === 6 || date.getDay() === 0
 }

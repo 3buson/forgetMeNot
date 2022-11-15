@@ -18,6 +18,11 @@ export async function updateHtml() {
 }
 
 export async function openNagPage() {
+    const numberOfStaleIssues = await getNumberOfStaleIssues()
+    if (numberOfStaleIssues === 0 || !numberOfStaleIssues) {
+        return
+    }
+
     const nagPageUrl = chrome.runtime.getURL("nagging/nagging.html");
     await chrome.tabs.create({
         active: true,

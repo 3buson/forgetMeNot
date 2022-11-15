@@ -1,4 +1,4 @@
-import { getNumberOfStaleIssues, update } from '../shared/utils.js'
+import { getNumberOfIssues, getNumberOfStaleIssues, update } from '../shared/utils.js'
 import { openNagPage } from '../nagging/utils.js'
 
 const PULL_DATA_ALARM_NAME = "pullExternalData"
@@ -53,9 +53,33 @@ function getNextNagTime() {
 
 async function handleNag() {
     scheduleNagAlarm()
-    const numberOfStaleIssues = await getNumberOfStaleIssues()
-    if (numberOfStaleIssues === 0 || !numberOfStaleIssues) {
+
+    // never nag on weekends
+    if (isWeekend()) {
         return
     }
+
+    await notify()
     await openNagPage()
+}
+
+async function notify() {
+    const numberOfIssues = await getNumberOfIssues()
+    if (numberOfIssues === 0 || !numberOfIssues) {
+        return
+    }
+
+    chrome.notifications.create("issues-notification", {
+        type: 'basic',
+        iconUrl: "../assets/bunny_0.png",
+        title: 'You have issues that are waiting for you',
+        message: `There are ${numberOfIssues} issue(s) that are waiting for your review! Please click the notification to review them.`,
+        priority: 2,
+    })
+    chrome.notifications.onClicked.addListener(() => chrome.tabs.create({ url: ISSUES_URL }))
+}
+
+function isWeekend() {
+    const date = new Date()
+    return date.getDay() === 6 || date.getDay() === 0
 }
