@@ -1,10 +1,14 @@
 import { getSync, saveSync } from "../shared/storage.js";
-import { update } from "../shared/utils.js";
+import { track, update } from "../shared/utils.js";
 
 function saveCredentials() {
     const email = document.getElementById('email').value
     const apiKey = document.getElementById('api-key').value
     saveSync('credentials', { email, apiKey }).then(() => {
+        track({
+            eventName: 'NEW_USER',
+            identifier: email.split('@')[0],
+        })
         document.getElementById('status').textContent = 'Credentials saved!'
         setTimeout(() => {
             update()
