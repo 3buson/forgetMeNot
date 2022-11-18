@@ -22,8 +22,6 @@ export async function track (data) {
     }
 
     return fetch(`${TRACK_URL_BASE}track`, options)
-        .then(() => {
-            console.log('User signup tracking successful')
-        })
+        .then(() => console.log('User signup tracking successful'))
         .catch(error => console.error(error))
 }
