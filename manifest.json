@@ -25,6 +25,6 @@
     ],
     "host_permissions": [
         "https://celtra.atlassian.net/",
-        "https://track.celtra.io/"
+        "https://api-eu.mixpanel.com/"
     ]
 }
