@@ -1,6 +1,6 @@
 import { getSync, saveLocally } from "./storage.js"
 
-export async function loadIssuesFromJira () {
+export async function loadIssues () {
     console.log("Loading issues from Jira.")
     const credentials = await getSync("credentials")
     if (!credentials || !credentials.email || !credentials.apiKey) {
@@ -18,6 +18,7 @@ export async function loadIssuesFromJira () {
     return fetch(url, options)
         .then(response => response.json())
         .then(data => {
+            console.log("Issues loaded, saving into storage.")
             saveLocally("issueUpdatedTimestamps", data.issues.map(issue => issue.fields.updated))
             saveLocally("lastChanged", Date.now())
         })

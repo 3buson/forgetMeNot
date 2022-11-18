@@ -1,4 +1,4 @@
-import { loadIssuesFromJira } from "./jira.js"
+import { loadIssues } from "./issues.js"
 import { getLocally } from "./storage.js"
 
 const ONE_DAY_IN_MILISECONDS = 24 * 60 * 60 * 1000
@@ -13,7 +13,7 @@ export function toggleElement (elementId, visible) {
 }
 
 export async function update () {
-    await loadIssuesFromJira()
+    await loadIssues()
     const numberOfIssues = await getNumberOfIssues()
     const numberOfStaleIssues = await getNumberOfStaleIssues()
     animateIcon(numberOfIssues, numberOfStaleIssues)
