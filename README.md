@@ -33,3 +33,8 @@ For the best experience, please pin the extension to your taskbar.
 - The popup displays if and how many issues are assigned to you and provides a link to open them in Jira.
 - If the issue has not been updated for more than 24 hours it will be considered as 'stale'.
 - You will get notified about stale issues every working day at 9 am and 2 pm through a new tab and a system notification.
+
+<br/>
+
+## TODO
+- add an option to disable nagging
