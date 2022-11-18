@@ -14,7 +14,7 @@ function saveCredentials () {
         document.getElementById("status").textContent = "Credentials saved!"
         setTimeout(() => {
             update()
-            // chrome.tabs.getCurrent(tab => chrome.tabs.remove(tab.id))
+            chrome.tabs.getCurrent(tab => chrome.tabs.remove(tab.id))
         }, 500)
     })
 }
