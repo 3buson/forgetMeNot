@@ -1,8 +1,9 @@
-import { getSync, saveLocally } from "./storage.js"
+import { JiraIssuesResponse, StorageKeyType } from "../types"
+import { getSync, saveLocally } from "./storage"
 
-export async function loadIssues () {
+export async function loadIssues (): Promise<void> {
     console.log("Loading issues from Jira.")
-    const credentials = await getSync("credentials")
+    const credentials = await getSync(StorageKeyType.CREDENTIALS)
     if (!credentials || !credentials.email || !credentials.apiKey) {
         console.warn("Credentials not present! Cannot fetch from Jira.")
         chrome.runtime.openOptionsPage()
@@ -17,10 +18,10 @@ export async function loadIssues () {
 
     return fetch(url, options)
         .then(response => response.json())
-        .then(data => {
+        .then((data: JiraIssuesResponse) => {
             console.log("Issues loaded, saving into storage.")
-            saveLocally("issueUpdatedTimestamps", data.issues.map(issue => issue.fields.updated))
-            saveLocally("lastChanged", Date.now())
+            saveLocally(StorageKeyType.ISSUE_UPDATED_TIMESTAMPS, data.issues.map(issue => issue.fields.updated))
+            saveLocally(StorageKeyType.LAST_CHANGED, Date.now())
         })
         .catch(error => console.error(error))
 }

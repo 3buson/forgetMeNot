@@ -1,0 +1,50 @@
+@import "../shared/common.css";
+
+html {
+    height: 230px;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 8px;
+}
+
+#loaded {
+    display: none;
+    text-align: center;
+    width: 300px;
+}
+
+.spinner {
+    width: 200px;
+    margin: auto;
+    text-align: center;
+    color: var(--blue);
+}
+
+.spinner__icon {
+    width: 48px;
+    height: 48px;
+    fill: var(--blue);
+    animation: LOADING_CIRCLE 1s infinite linear;
+}
+
+.spinner__text {
+    font-size: 14px;
+    margin-top: 16px;
+}
+
+#issues {
+    margin-top: 32px;
+}
+
+@keyframes LOADING_CIRCLE {
+    100% {
+        transform: rotate(360deg);
+    }
+}

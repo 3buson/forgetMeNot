@@ -1,12 +1,14 @@
-import { getNumberOfIssues, ISSUES_URL, update } from "../shared/utils.js"
-import { openNagPage } from "../nagging/utils.js"
+import { getNumberOfIssues, ISSUES_URL, update } from "../shared/utils"
+import { openNagPage } from "../nagging/utils"
 
 const PULL_DATA_ALARM_NAME = "pullExternalData"
 const NAG_ALARM_NAME = "nag"
 
 initialize()
+notify()
+openNagPage()
 
-function initialize () {
+async function initialize (): Promise<void> {
     chrome.alarms.onAlarm.addListener(alarm => {
         if (alarm.name === PULL_DATA_ALARM_NAME) {
             update()
@@ -17,25 +19,25 @@ function initialize () {
         }
     })
 
-    update()
+    await update()
     schedulePullDataAlarm()
     scheduleNagAlarm()
 }
 
-function schedulePullDataAlarm () {
+function schedulePullDataAlarm (): void {
     chrome.alarms.clear(PULL_DATA_ALARM_NAME)
     chrome.alarms.create(PULL_DATA_ALARM_NAME, { periodInMinutes: 5 })
     console.log("Pull data alarm scheduled.")
 }
 
-function scheduleNagAlarm () {
+function scheduleNagAlarm (): void {
     chrome.alarms.clear(NAG_ALARM_NAME)
     const nextNagTime = getNextNagTime()
     chrome.alarms.create(NAG_ALARM_NAME, { when: nextNagTime.valueOf() })
     console.log(`Nag alarm scheduled for ${getNextNagTime().toString()}.`)
 }
 
-function getNextNagTime () {
+function getNextNagTime (): Date {
     const date = new Date()
     const currentHour = date.getHours()
 
@@ -51,7 +53,7 @@ function getNextNagTime () {
     return date
 }
 
-async function handleNag () {
+async function handleNag (): Promise<void> {
     scheduleNagAlarm()
 
     // never nag on weekends
@@ -63,7 +65,8 @@ async function handleNag () {
     await openNagPage()
 }
 
-async function notify () {
+async function notify (): Promise<void>
+{
     const numberOfIssues = await getNumberOfIssues()
     if (numberOfIssues === 0 || !numberOfIssues) {
         return
@@ -71,7 +74,7 @@ async function notify () {
 
     chrome.notifications.create("issues-notification", {
         type: "basic",
-        iconUrl: "../assets/bunny_0.png",
+        iconUrl: "../../public/bunny_0.png",
         title: "You have issues that are waiting for you",
         message: `There are ${numberOfIssues} issue(s) that are waiting for your review! Please click the notification to review them.`,
         priority: 2,

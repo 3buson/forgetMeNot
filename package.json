@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "description": "Nagging you about code and spec reviews since 2022.",
   "scripts": {
+    "watch": "webpack --config webpack.config.js --watch",
+    "build": "webpack --config webpack.config.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint",
     "lint:fix": "eslint --fix"
@@ -18,7 +20,15 @@
   },
   "homepage": "https://github.com/3buson/forgetMeNot#readme",
   "devDependencies": {
+    "@types/chrome": "^0.0.202",
+    "copy-webpack-plugin": "^11.0.0",
     "eslint": "^8.27.0",
-    "eslint-plugin-import": "^2.26.0"
+    "eslint-plugin-import": "^2.26.0",
+    "file-loader": "^6.2.0",
+    "path": "^0.12.7",
+    "ts-loader": "^9.4.1",
+    "typescript": "^4.9.3",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.0"
   }
 }
