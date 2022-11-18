@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Nagging you about code and spec reviews since 2022.",
   "scripts": {
+    "build": "esbuild ./src/background.js --outdir=lib",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint",
     "lint:fix": "eslint --fix"
@@ -19,6 +20,7 @@
   "homepage": "https://github.com/3buson/forgetMeNot#readme",
   "devDependencies": {
     "eslint": "^8.27.0",
-    "eslint-plugin-import": "^2.26.0"
+    "eslint-plugin-import": "^2.26.0",
+    "typescript": "^4.9.3"
   }
 }

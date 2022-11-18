@@ -46,18 +46,18 @@ export async function getNumberOfStaleIssues () {
 
 function animateIcon (numberOfIssues, numberOfStaleIssues) {
     if (numberOfIssues === 0) {
-        chrome.action.setIcon({ path: "../assets/icon128.png" })
+        chrome.action.setIcon({ path: "../../public/icon128.png" })
         return
     }
 
     if (numberOfStaleIssues === 0) {
-        chrome.action.setIcon({ path: "../assets/bunny_0.png" })
+        chrome.action.setIcon({ path: "../../public/bunny_0.png" })
         return
     }
 
     currentIconState++
     const iconNumber = currentIconState % 4
-    chrome.action.setIcon({ path: `../assets/bunny_${iconNumber}.png` })
+    chrome.action.setIcon({ path: `../../public/bunny_${iconNumber}.png` })
     if (timeout) {
         clearTimeout(timeout)
         timeout = null
