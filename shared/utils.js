@@ -1,25 +1,25 @@
-import { loadIssuesFromJira } from './jira.js'
+import { loadIssuesFromJira } from "./jira.js"
 import { getLocally } from "./storage.js"
 
 const ONE_DAY_IN_MILISECONDS = 24 * 60 * 60 * 1000
 let timeout = null
 let currentIconState = 0
 
-export const ISSUES_URL = 'https://celtra.atlassian.net/issues/?jql=assignee%20%3D%20currentUser()%20and%20status%20in%20("Code%20review"%2C%20"Spec%20review")'
+export const ISSUES_URL = "https://celtra.atlassian.net/issues/?jql=assignee%20%3D%20currentUser()%20and%20status%20in%20(\"Code%20review\"%2C%20\"Spec%20review\")"
 
-export function toggleElement(elementId, visible) {
-    const display = visible ? 'block' : 'none'
+export function toggleElement (elementId, visible) {
+    const display = visible ? "block" : "none"
     document.getElementById(elementId).style.display = display
 }
 
-export async function update() {
+export async function update () {
     await loadIssuesFromJira()
     const numberOfIssues = await getNumberOfIssues()
     const numberOfStaleIssues = await getNumberOfStaleIssues()
     animateIcon(numberOfIssues, numberOfStaleIssues)
 }
 
-export async function getNumberOfIssues() {
+export async function getNumberOfIssues () {
     const issueUpdatedTimestamps = await getLocally("issueUpdatedTimestamps")
     if (!Array.isArray(issueUpdatedTimestamps)) {
         return 0
@@ -28,7 +28,7 @@ export async function getNumberOfIssues() {
     return issueUpdatedTimestamps.length
 }
 
-export async function getNumberOfStaleIssues() {
+export async function getNumberOfStaleIssues () {
     const issueUpdatedTimestamps = await getLocally("issueUpdatedTimestamps")
     if (!Array.isArray(issueUpdatedTimestamps)) {
         return 0
@@ -44,7 +44,7 @@ export async function getNumberOfStaleIssues() {
     }, 0)
 }
 
-function animateIcon(numberOfIssues, numberOfStaleIssues) {
+function animateIcon (numberOfIssues, numberOfStaleIssues) {
     if (numberOfIssues === 0) {
         chrome.action.setIcon({ path: "../assets/icon128.png" })
         return

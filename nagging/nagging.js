@@ -1,3 +1,3 @@
-import { updateHtml } from './utils.js'
+import { updateHtml } from "./utils.js"
 
 updateHtml()

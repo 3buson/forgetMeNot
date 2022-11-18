@@ -1,20 +1,20 @@
-import { getNumberOfIssues, getNumberOfStaleIssues, ISSUES_URL, toggleElement, update } from '../shared/utils.js'
+import { getNumberOfIssues, getNumberOfStaleIssues, ISSUES_URL, toggleElement, update } from "../shared/utils.js"
 
-function setIssuesUrl() {
+function setIssuesUrl () {
     document.getElementById("issues-url").href = ISSUES_URL
 }
 
-function updateHtml() {
+function updateHtml () {
     updateMessaging()
     showLoaded()
 }
 
-function showLoaded() {
+function showLoaded () {
     toggleElement("loading", false)
     toggleElement("loaded", true)
 }
 
-async function updateMessaging() {
+async function updateMessaging () {
     const numberOfIssues = await getNumberOfIssues()
     const numberOfIssuesElement = document.getElementById("number-of-issues")
     numberOfIssuesElement.textContent = numberOfIssues
@@ -37,7 +37,6 @@ async function updateMessaging() {
         toggleElement("stale-issues", false)
     }
 }
-
 
 setIssuesUrl()
 update().then(() => updateHtml())
