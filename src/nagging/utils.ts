@@ -1,12 +1,12 @@
-import { getNumberOfIssues, getNumberOfStaleIssues, toggleElement } from "../shared/utils.js"
+import { getNumberOfIssues, getNumberOfStaleIssues, toggleElement } from "../shared/utils"
 
 export async function updateHtml () {
     const numberOfIssues = await getNumberOfIssues()
     const numberOfStaleIssues = await getNumberOfStaleIssues()
 
-    document.getElementById("number-of-issues-1").innerText = numberOfIssues
-    document.getElementById("number-of-issues-2").innerText = numberOfIssues
-    document.getElementById("number-of-stale-issues").innerText = numberOfStaleIssues
+    document.getElementById("number-of-issues-1").innerText = numberOfIssues.toString(0)
+    document.getElementById("number-of-issues-2").innerText = numberOfIssues.toString(0)
+    document.getElementById("number-of-stale-issues").innerText = numberOfStaleIssues.toString(0)
 
     if (numberOfStaleIssues > 0) {
         toggleElement("stale-issues", true)
@@ -19,7 +19,7 @@ export async function updateHtml () {
 
 export async function openNagPage () {
     const numberOfStaleIssues = await getNumberOfStaleIssues()
-    if (numberOfStaleIssues === 0 || !numberOfStaleIssues) {
+    if (numberOfStaleIssues === 0) {
         return
     }
 

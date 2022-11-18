@@ -1,5 +1,5 @@
-import { getNumberOfIssues, ISSUES_URL, update } from "../shared/utils.js"
-import { openNagPage } from "../nagging/utils.js"
+import { getNumberOfIssues, ISSUES_URL, update } from "../shared/utils"
+import { openNagPage } from "../nagging/utils"
 
 const PULL_DATA_ALARM_NAME = "pullExternalData"
 const NAG_ALARM_NAME = "nag"

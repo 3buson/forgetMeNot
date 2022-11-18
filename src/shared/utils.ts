@@ -1,5 +1,5 @@
-import { loadIssues } from "./issues.js"
-import { getLocally } from "./storage.js"
+import { loadIssues } from "./issues"
+import { getLocally } from "./storage"
 
 const ONE_DAY_IN_MILISECONDS = 24 * 60 * 60 * 1000
 let timeout = null
@@ -7,19 +7,19 @@ let currentIconState = 0
 
 export const ISSUES_URL = "https://celtra.atlassian.net/issues/?jql=assignee%20%3D%20currentUser()%20and%20status%20in%20(\"Code%20review\"%2C%20\"Spec%20review\")"
 
-export function toggleElement (elementId, visible) {
+export function toggleElement (elementId: string, visible: boolean): void {
     const display = visible ? "block" : "none"
     document.getElementById(elementId).style.display = display
 }
 
-export async function update () {
+export async function update (): Promise<void> {
     await loadIssues()
     const numberOfIssues = await getNumberOfIssues()
     const numberOfStaleIssues = await getNumberOfStaleIssues()
     animateIcon(numberOfIssues, numberOfStaleIssues)
 }
 
-export async function getNumberOfIssues () {
+export async function getNumberOfIssues (): Promise<number> {
     const issueUpdatedTimestamps = await getLocally("issueUpdatedTimestamps")
     if (!Array.isArray(issueUpdatedTimestamps)) {
         return 0
@@ -28,14 +28,16 @@ export async function getNumberOfIssues () {
     return issueUpdatedTimestamps.length
 }
 
-export async function getNumberOfStaleIssues () {
+export async function getNumberOfStaleIssues (): Promise<number> {
     const issueUpdatedTimestamps = await getLocally("issueUpdatedTimestamps")
     if (!Array.isArray(issueUpdatedTimestamps)) {
         return 0
     }
 
     return issueUpdatedTimestamps.reduce((numberOfStaleIssues, issueUpdatedTimestamp) => {
-        const diffInMiliseconds = Math.abs(new Date(issueUpdatedTimestamp) - new Date())
+        const nowTime = new Date().getTime()
+        const issueTime = new Date(issueUpdatedTimestamp).getTime()
+        const diffInMiliseconds = Math.abs(nowTime - issueTime)
         if (diffInMiliseconds > ONE_DAY_IN_MILISECONDS) {
             return numberOfStaleIssues + 1
         } else {
@@ -44,7 +46,7 @@ export async function getNumberOfStaleIssues () {
     }, 0)
 }
 
-function animateIcon (numberOfIssues, numberOfStaleIssues) {
+function animateIcon (numberOfIssues, numberOfStaleIssues): void {
     if (numberOfIssues === 0) {
         chrome.action.setIcon({ path: "../../public/icon128.png" })
         return

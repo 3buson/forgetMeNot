@@ -1,6 +1,6 @@
-import { getSync, saveLocally } from "./storage.js"
+import { getSync, saveLocally } from "./storage"
 
-export async function loadIssues () {
+export async function loadIssues (): Promise<void> {
     console.log("Loading issues from Jira.")
     const credentials = await getSync("credentials")
     if (!credentials || !credentials.email || !credentials.apiKey) {
