@@ -5,6 +5,8 @@ const PULL_DATA_ALARM_NAME = "pullExternalData"
 const NAG_ALARM_NAME = "nag"
 
 initialize()
+notify()
+openNagPage()
 
 async function initialize (): Promise<void> {
     chrome.alarms.onAlarm.addListener(alarm => {

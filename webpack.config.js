@@ -1,15 +1,28 @@
 /* eslint-env node */
 const path = require("path")
-const CopyPlugin = require("copy-webpack-plugin")
 const srcDir = path.join(__dirname, "src")
+const CopyWebpackPlugin = require("copy-webpack-plugin")
+
+const filesToCopy = [
+    { source: "src/nagging/nagging.css", dest: "nagging" },
+    { source: "src/nagging/nagging.html", dest: "nagging" },
+    { source: "src/options/options.css", dest: "options" },
+    { source: "src/options/options.html", dest: "options" },
+    { source: "src/popup/popup.css", dest: "popup" },
+    { source: "src/popup/popup.html", dest: "popup" },
+    { source: "src/shared/common.css", dest: "shared" },
+]
+const copyWebpackPluginPatterns = filesToCopy.map(fileToCopy => {
+    return { from: fileToCopy.source, to: fileToCopy.dest }
+})
 
 module.exports = {
     mode: "production",
     entry: {
-        popup: path.join(srcDir, "popup/popup.ts"),
-        options: path.join(srcDir, "options/options.ts"),
-        background: path.join(srcDir, "background/background.ts"),
-        nagging: path.join(srcDir, "nagging/nagging.ts"),
+        "popup/popup": path.join(srcDir, "popup/popup.ts"),
+        "options/options": path.join(srcDir, "options/options.ts"),
+        "background/background": path.join(srcDir, "background/background.ts"),
+        "nagging/nagging": path.join(srcDir, "nagging/nagging.ts"),
     },
     output: {
         path: path.join(__dirname, "dist"),
@@ -24,9 +37,11 @@ module.exports = {
                 exclude: /node_modules/,
             },
             {
-                test: /\.html$/i,
-                use: "html-loader",
-                exclude: /node_modules/,
+                test: /\.(css|html)$/i,
+                loader: "file-loader",
+                options: {
+                    name: "[path]/[name].[ext]",
+                },
             },
         ],
     },
@@ -34,7 +49,11 @@ module.exports = {
         minimize: false,
     },
     resolve: {
-        extensions: [".ts", ".js", ".html"],
+        extensions: [".ts", ".js", ".css", ".html"],
     },
-    plugins: [],
+    plugins: [
+        new CopyWebpackPlugin({
+            patterns: copyWebpackPluginPatterns,
+        }),
+    ],
 }

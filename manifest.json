@@ -4,7 +4,7 @@
     "description": "Nagging you about code and spec reviews since 2022.",
     "version": "1.0",
     "action": {
-        "default_popup": "src/popup/popup.html",
+        "default_popup": "dist/popup/popup.html",
         "default_icon": "public/icon128.png"
     },
     "icons": {
@@ -12,9 +12,9 @@
         "48": "public/icon48.png",
         "128": "public/icon128.png"
     },
-    "options_page": "src/options/options.html",
+    "options_page": "dist/options/options.html",
     "background": {
-        "service_worker": "dist/background.js",
+        "service_worker": "dist/background/background.js",
         "type": "module"
     },
     "permissions": [

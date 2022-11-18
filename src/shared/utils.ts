@@ -48,7 +48,7 @@ export async function getNumberOfStaleIssues (): Promise<number> {
         } else {
             return numberOfStaleIssues
         }
-    }, 0)
+    }, 1)
 }
 
 function animateIcon (numberOfIssues: number, numberOfStaleIssues: number): void {

@@ -24,7 +24,7 @@
     "copy-webpack-plugin": "^11.0.0",
     "eslint": "^8.27.0",
     "eslint-plugin-import": "^2.26.0",
-    "html-loader": "^4.2.0",
+    "file-loader": "^6.2.0",
     "path": "^0.12.7",
     "ts-loader": "^9.4.1",
     "typescript": "^4.9.3",

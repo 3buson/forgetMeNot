@@ -1,0 +1,49 @@
+:root {
+    --blue: #1966FF;
+    --pink: #EC5EA5;
+}
+
+a {
+    color: var(--pink);
+}
+
+a:visited {
+    color: var(--pink);
+}
+
+a:hover {
+    font-weight: bold;
+}
+
+.heading,
+.subheading {
+    margin: 16px auto;
+    color: var(--pink);
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.heading {
+    font-size: 16px;
+}
+
+.wrapper {
+    text-align: center;
+}
+
+.button {
+    width: fit-content;
+    margin: auto;
+    padding: 4px 8px;
+    color: var(--pink);
+    border: 1px solid grey;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;;
+}
+
+.button:hover {
+    background-color: var(--pink);
+    border-color: var(--pink);
+    color: white;
+}
