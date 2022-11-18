@@ -1,0 +1,24 @@
+{
+  "name": "forgetmenot",
+  "version": "1.0.0",
+  "description": "Nagging you about code and spec reviews since 2022.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/3buson/forgetMeNot.git"
+  },
+  "author": "Matic Tribuson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/3buson/forgetMeNot/issues"
+  },
+  "homepage": "https://github.com/3buson/forgetMeNot#readme",
+  "devDependencies": {
+    "eslint": "^8.27.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0"
+  }
+}
