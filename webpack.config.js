@@ -12,7 +12,7 @@ module.exports = {
         nagging: path.join(srcDir, "nagging/nagging.ts"),
     },
     output: {
-        path: path.join(__dirname, "dist/js"),
+        path: path.join(__dirname, "dist"),
         filename: "[name].js",
         clean: true,
     },
@@ -23,18 +23,18 @@ module.exports = {
                 use: "ts-loader",
                 exclude: /node_modules/,
             },
+            {
+                test: /\.html$/i,
+                use: "html-loader",
+                exclude: /node_modules/,
+            },
         ],
     },
-    resolve: {
-        extensions: [".ts", ".js"],
+    optimization: {
+        minimize: false,
     },
-    plugins: [
-        new CopyPlugin({
-            patterns: [
-                "*.css",
-                "*.html",
-            ],
-            options: {},
-        }),
-    ],
+    resolve: {
+        extensions: [".ts", ".js", ".html"],
+    },
+    plugins: [],
 }

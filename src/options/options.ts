@@ -36,8 +36,8 @@ function loadCredentials (): Promise<void> {
             if (!credentials) {
                 return
             }
-            (<HTMLInputElement>document.getElementById("email")).value = credentials.email
-            (<HTMLInputElement>document.getElementById("api-key")).value = credentials.apiKey
+            (<HTMLInputElement>document.getElementById("email")).value = credentials.email;
+            (<HTMLInputElement>document.getElementById("api-key")).value = credentials.apiKey;
         })
 }
 
