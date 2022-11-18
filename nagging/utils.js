@@ -1,6 +1,7 @@
 import { getNumberOfIssues, getNumberOfStaleIssues, toggleElement } from "../shared/utils.js"
 
 export async function updateHtml () {
+    document.title = "Please review assigned issues."
     const numberOfIssues = await getNumberOfIssues()
     const numberOfStaleIssues = await getNumberOfStaleIssues()
 
