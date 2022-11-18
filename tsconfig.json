@@ -2,8 +2,29 @@
     "compilerOptions": {
         "outDir": "./dist",
         "allowJs": true,
-        "target": "ESNext"
+        "target": "ESNext",
+        "declaration": true,
+        "strict": true,
+        "noImplicitAny": true,
+        "strictNullChecks": true,
+        "noImplicitThis": true,
+        "alwaysStrict": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "noImplicitReturns": true,
+        "noFallthroughCasesInSwitch": true,
+        "inlineSourceMap": true,
+        "inlineSources": true,
+        "experimentalDecorators": true,
+        "strictPropertyInitialization": true,
+        "esModuleInterop": true
     },
+    "typeRoots": [
+        "./node_modules/@types"
+    ],
+    "types": [
+        "chrome"
+    ],
     "include": ["./src/**/*"],
     "exclude": [
         "node_modules",

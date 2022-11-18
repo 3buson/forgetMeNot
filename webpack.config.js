@@ -14,6 +14,7 @@ module.exports = {
     output: {
         path: path.join(__dirname, "dist/js"),
         filename: "[name].js",
+        clean: true,
     },
     module: {
         rules: [
@@ -29,7 +30,10 @@ module.exports = {
     },
     plugins: [
         new CopyPlugin({
-            patterns: [{ from: ".", to: "../", context: "public" }],
+            patterns: [
+                "*.css",
+                "*.html",
+            ],
             options: {},
         }),
     ],

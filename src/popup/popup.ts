@@ -17,7 +17,9 @@ function showLoaded (): void {
 async function updateMessaging (): Promise<void> {
     const numberOfIssues = await getNumberOfIssues()
     const numberOfIssuesElement = document.getElementById("number-of-issues")
-    numberOfIssuesElement.textContent = numberOfIssues.toString()
+    if (numberOfIssuesElement) {
+        numberOfIssuesElement.textContent = numberOfIssues.toString()
+    }
 
     if (numberOfIssues > 0) {
         toggleElement("no-issues", false)
@@ -29,7 +31,9 @@ async function updateMessaging (): Promise<void> {
 
     const numberOfStaleIssues = await getNumberOfStaleIssues()
     const numberOfStaleIssuesElement = document.getElementById("number-of-stale-issues")
-    numberOfStaleIssuesElement.textContent = numberOfStaleIssues.toString()
+    if (numberOfStaleIssuesElement) {
+        numberOfStaleIssuesElement.textContent = numberOfStaleIssues.toString()
+    }
 
     if (numberOfStaleIssues > 0) {
         toggleElement("stale-issues", true)

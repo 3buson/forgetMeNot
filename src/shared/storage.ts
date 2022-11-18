@@ -1,29 +1,25 @@
-export const STORAGE_KEYS = {
-    issueUpdatedTimestamps: "issueUpdatedTimestamps",
-    lastChanged: "lastChanged",
-    credentials: "credentials",
+import { StorageKeyType } from "../types"
+
+export function saveLocally (key: StorageKeyType, value: any): Promise<void> {
+    return new Promise(resolve => chrome.storage.local.set({ [key]: value }, () => resolve()))
 }
 
-export function saveLocally (key, value): Promise<void> {
-    return new Promise(resolve => chrome.storage.local.set({ [STORAGE_KEYS[key]]: value }, () => resolve()))
-}
-
-export function getLocally (key): Promise<any> {
+export function getLocally (key: StorageKeyType): Promise<any> {
     return new Promise(resolve => {
         chrome.storage.local.get().then(storage => {
-            resolve(storage[STORAGE_KEYS[key]])
+            resolve(storage[key])
         })
     })
 }
 
-export function saveSync (key, value): Promise<void> {
-    return new Promise(resolve => chrome.storage.sync.set({ [STORAGE_KEYS[key]]: value }, () => resolve()))
+export function saveSync (key: StorageKeyType, value: any): Promise<void> {
+    return new Promise(resolve => chrome.storage.sync.set({ [key]: value }, () => resolve()))
 }
 
-export function getSync (key): Promise<any> {
+export function getSync (key: StorageKeyType): Promise<any> {
     return new Promise(resolve => {
         chrome.storage.sync.get().then(storage => {
-            resolve(storage[STORAGE_KEYS[key]])
+            resolve(storage[key])
         })
     })
 }
