@@ -22,5 +22,10 @@ export async function loadIssues () {
             saveLocally("issueUpdatedTimestamps", data.issues.map(issue => issue.fields.updated))
             saveLocally("lastChanged", Date.now())
         })
-        .catch(error => console.error(error))
+        .catch(error => {
+            console.error(error)
+            saveLocally("issueUpdatedTimestamps", [])
+            saveLocally("lastChanged", Date.now())
+            alert("Failed loading issues from Jira, please check the credentials.")
+        })
 }
