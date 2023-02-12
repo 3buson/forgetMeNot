@@ -2,7 +2,7 @@ import { loadIssues } from "./issues.js"
 import { getLocally } from "./storage.js"
 
 const ONE_DAY_IN_MILISECONDS = 24 * 60 * 60 * 1000
-let timeout = null
+let iconAnimationTimeout = null
 let currentIconState = 0
 
 export const ISSUES_URL = "https://celtra.atlassian.net/issues/?jql=assignee%20%3D%20currentUser()%20and%20status%20in%20(\"Code%20review\"%2C%20\"Spec%20review\")"
@@ -47,20 +47,26 @@ export async function getNumberOfStaleIssues () {
 function animateIcon (numberOfIssues, numberOfStaleIssues) {
     if (numberOfIssues === 0) {
         chrome.action.setIcon({ path: "../assets/icon128.png" })
+        clearIconAnimationTimeout()
         return
     }
 
     if (numberOfStaleIssues === 0) {
         chrome.action.setIcon({ path: "../assets/bunny_0.png" })
+        clearIconAnimationTimeout()
         return
     }
 
     currentIconState++
     const iconNumber = currentIconState % 4
     chrome.action.setIcon({ path: `../assets/bunny_${iconNumber}.png` })
-    if (timeout) {
-        clearTimeout(timeout)
-        timeout = null
+    clearIconAnimationTimeout()
+    iconAnimationTimeout = setTimeout(() => animateIcon(numberOfIssues, numberOfStaleIssues), 50)
+}
+
+function clearIconAnimationTimeout () {
+    if (iconAnimationTimeout) {
+        clearTimeout(iconAnimationTimeout)
+        iconAnimationTimeout = null
     }
-    timeout = setTimeout(() => animateIcon(numberOfIssues, numberOfStaleIssues), 50)
 }
