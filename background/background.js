@@ -4,6 +4,27 @@ import { openNagPage } from "../nagging/utils.js"
 const PULL_DATA_ALARM_NAME = "pullExternalData"
 const NAG_ALARM_NAME = "nag"
 
+var newConsole = (function (oldConsole) {
+    const timestamp = new Date().toISOString()
+    return {
+        log: function (text) {
+            oldConsole.log(`${timestamp} ${text}`)
+        },
+        info: function (text) {
+            oldConsole.info(`${timestamp} ${text}`)
+        },
+        warn: function (text) {
+            oldConsole.warn(`${timestamp} ${text}`)
+        },
+        error: function (text) {
+            oldConsole.error(`${timestamp} ${text}`)
+        },
+    }
+}(console))
+
+// Then redefine the old console
+console = newConsole
+
 initialize()
 
 function initialize () {
