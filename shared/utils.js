@@ -13,10 +13,14 @@ export function toggleElement (elementId, visible) {
 }
 
 export async function update () {
-    await loadIssues()
-    const numberOfIssues = await getNumberOfIssues()
-    const numberOfStaleIssues = await getNumberOfStaleIssues()
-    animateIcon(numberOfIssues, numberOfStaleIssues)
+    try {
+        await loadIssues()
+        const numberOfIssues = await getNumberOfIssues()
+        const numberOfStaleIssues = await getNumberOfStaleIssues()
+        animateIcon(numberOfIssues, numberOfStaleIssues)
+    } catch {
+        setError()
+    }
 }
 
 export async function getNumberOfIssues () {
@@ -62,6 +66,10 @@ function animateIcon (numberOfIssues, numberOfStaleIssues) {
     chrome.action.setIcon({ path: `../assets/bunny_${iconNumber}.png` })
     clearIconAnimationTimeout()
     iconAnimationTimeout = setTimeout(() => animateIcon(numberOfIssues, numberOfStaleIssues), 50)
+}
+
+function setError () {
+    chrome.action.setIcon({ path: "../assets/icon_error.png" })
 }
 
 function clearIconAnimationTimeout () {
