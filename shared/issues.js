@@ -26,6 +26,6 @@ export async function loadIssues () {
             console.error(error)
             saveLocally("issueUpdatedTimestamps", [])
             saveLocally("lastChanged", Date.now())
-            alert("Failed loading issues from Jira, please check the credentials.")
+            throw error
         })
 }
