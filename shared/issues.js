@@ -1,4 +1,5 @@
 import { getSync, saveLocally } from "./storage.js"
+import { JQL } from "./utils.js"
 
 export async function loadIssues () {
     console.log("Loading issues from Jira.")
@@ -9,7 +10,7 @@ export async function loadIssues () {
         return
     }
 
-    const url = "https://celtra.atlassian.net/rest/api/3/search?jql=assignee%20%3D%20currentUser()%20and%20status%20in%20(\"Code%20review\"%2C%20\"Spec%20review\")"
+    const url = `https://celtra.atlassian.net/rest/api/3/search?jql=${JQL}`
     const options = {
         method: "GET",
         headers: { "Authorization": `Basic ${btoa(`${credentials.email}:${credentials.apiKey}`)}` },

@@ -5,7 +5,8 @@ const ONE_DAY_IN_MILISECONDS = 24 * 60 * 60 * 1000
 let iconAnimationTimeout = null
 let currentIconState = 0
 
-export const ISSUES_URL = "https://celtra.atlassian.net/issues/?jql=assignee%20%3D%20currentUser()%20and%20status%20in%20(\"Code%20review\"%2C%20\"Spec%20review\")"
+export const JQL = "assignee%20%3D%20currentUser()%20and%20status%20in%20(\"Code%20review\"%2C%20\"Spec%20review\"%2C%20\"In%20review\")"
+export const ISSUES_URL = `https://celtra.atlassian.net/issues/?jql=${JQL}`
 
 export function toggleElement (elementId, visible) {
     const display = visible ? "block" : "none"
