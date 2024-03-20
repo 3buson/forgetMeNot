@@ -1,6 +1,6 @@
 {
   "name": "forgetmenot",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Nagging you about code and spec reviews since 2022.",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
