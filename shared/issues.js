@@ -4,7 +4,7 @@ import { JQL } from "./utils.js"
 export async function loadIssues () {
     console.log("Loading issues from Jira.")
 
-    const url = `https://celtra.atlassian.net/rest/api/3/search?jql=${JQL}`
+    const url = `https://celtra.atlassian.net/rest/api/3/search/jql?fields=updated&jql=${JQL}`
     const options = {
         method: "GET"
     }
